@@ -1,268 +1,174 @@
-import { FolderOpen, ExternalLink, Github, Star, Eye, GitBranch } from 'lucide-react';
+import { useReveal } from '../hooks/useReveal';
 
-export default function Projects() {
-  const projects = [
-    {
-      title: 'E-Commerce Platform',
-      description: 'A comprehensive e-commerce solution with advanced features including real-time inventory management, payment integration, and admin dashboard.',
-      image: 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&fit=crop&w=800&q=80',
-      technologies: ['React', 'Node.js', 'MongoDB', 'Stripe', 'Redis', 'AWS'],
-      github: '#',
-      demo: '#',
-      status: 'Completed',
-      stats: {
-        stars: 45,
-        forks: 12,
-        views: 1200
-      },
-      features: [
-        'User authentication & authorization',
-        'Shopping cart & wishlist functionality',
-        'Payment gateway integration',
-        'Order tracking system',
-        'Admin dashboard with analytics'
-      ],
-      color: 'from-blue-500 to-purple-600'
-    },
-    {
-      title: 'Task Management App',
-      description: 'A collaborative project management tool with real-time updates, team collaboration features, and advanced reporting capabilities.',
-      image: 'https://images.unsplash.com/photo-1611224923853-80b023f02d71?auto=format&fit=crop&w=800&q=80',
-      technologies: ['React', 'TypeScript', 'Express.js', 'PostgreSQL', 'Socket.io', 'Docker'],
-      github: '#',
-      demo: '#',
-      status: 'Completed',
-      stats: {
-        stars: 32,
-        forks: 8,
-        views: 890
-      },
-      features: [
-        'Real-time collaboration',
-        'Kanban board interface',
-        'Time tracking & reporting',
-        'Team management',
-        'File sharing capabilities'
-      ],
-      color: 'from-green-500 to-teal-600'
-    },
-    {
-      title: 'Weather Forecast App',
-      description: 'A beautiful and responsive weather application with location-based forecasts, interactive maps, and weather alerts.',
-      image: 'https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?auto=format&fit=crop&w=800&q=80',
-      technologies: ['React Native', 'Redux', 'OpenWeather API', 'Maps API', 'Push Notifications'],
-      github: '#',
-      demo: '#',
-      status: 'Completed',
-      stats: {
-        stars: 28,
-        forks: 6,
-        views: 650
-      },
-      features: [
-        '7-day weather forecast',
-        'Location-based services',
-        'Interactive weather maps',
-        'Push notifications for alerts',
-        'Offline capability'
-      ],
-      color: 'from-purple-500 to-pink-600'
-    },
-    {
-      title: 'Social Media Dashboard',
-      description: 'A comprehensive social media management platform with analytics, scheduling, and multi-platform integration.',
-      image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80',
-      technologies: ['Next.js', 'Prisma', 'PostgreSQL', 'Chart.js', 'Social APIs', 'Vercel'],
-      github: '#',
-      demo: '#',
-      status: 'In Development',
-      stats: {
-        stars: 18,
-        forks: 4,
-        views: 420
-      },
-      features: [
-        'Multi-platform integration',
-        'Content scheduling',
-        'Analytics & insights',
-        'Team collaboration',
-        'Automated reporting'
-      ],
-      color: 'from-orange-500 to-red-600'
-    },
-    {
-      title: 'Learning Management System',
-      description: 'An educational platform with course management, progress tracking, and interactive learning tools.',
-      image: 'https://images.unsplash.com/photo-1501504905252-473c47e087f8?auto=format&fit=crop&w=800&q=80',
-      technologies: ['React', 'Node.js', 'MySQL', 'AWS S3', 'Video.js', 'JWT'],
-      github: '#',
-      demo: '#',
-      status: 'Completed',
-      stats: {
-        stars: 52,
-        forks: 15,
-        views: 1500
-      },
-      features: [
-        'Course creation & management',
-        'Video streaming',
-        'Progress tracking',
-        'Quiz & assessment system',
-        'Certificate generation'
-      ],
-      color: 'from-teal-500 to-cyan-600'
-    },
-    {
-      title: 'Cryptocurrency Tracker',
-      description: 'A real-time cryptocurrency tracking application with portfolio management and price alerts.',
-      image: 'https://images.unsplash.com/photo-1518186233392-c232efbf2373?auto=format&fit=crop&w=800&q=80',
-      technologies: ['Vue.js', 'Vuex', 'CoinGecko API', 'Chart.js', 'PWA', 'Firebase'],
-      github: '#',
-      demo: '#',
-      status: 'Completed',
-      stats: {
-        stars: 38,
-        forks: 9,
-        views: 980
-      },
-      features: [
-        'Real-time price tracking',
-        'Portfolio management',
-        'Price alerts & notifications',
-        'Historical data charts',
-        'News integration'
-      ],
-      color: 'from-yellow-500 to-orange-600'
-    }
-  ];
+interface Project {
+  title: string;
+  subtitle: string;
+  description: string;
+  tech: string[];
+  image: string;
+  github: string;
+  demo: string;
+  featured?: boolean;
+}
+
+const PROJECTS: Project[] = [
+  {
+    title: 'Clothes E-Commerce',
+    subtitle: 'Full-Stack Platform',
+    description:
+      'A complete e-commerce solution built with Angular and Node.js featuring product browsing, cart management, user authentication, and responsive design across all devices.',
+    tech: ['Angular', 'Node.js', 'Express', 'MongoDB', 'TypeScript'],
+    image: '/images/project-ecommerce.png',
+    github: 'https://github.com/mohamed1fares/frontend-myapp',
+    demo: 'https://mohamed1fares.github.io/frontend-myapp/home',
+    featured: true,
+  },
+  {
+    title: 'Smart E-Commerce',
+    subtitle: 'Frontend Platform',
+    description:
+      'A headphones and electronics e-commerce platform with advanced product filtering, shopping cart with persistent state, and a clean storefront interface.',
+    tech: ['HTML', 'CSS', 'JavaScript', 'Responsive Design'],
+    image: '/images/project-platform.png',
+    github: 'https://github.com/mohamed1fares/smart-e-commerce-platform-',
+    demo: 'https://mohamed1fares.github.io/smart-e-commerce-platform-/',
+  },
+  {
+    title: 'Developer Portfolio',
+    subtitle: 'Personal Site',
+    description:
+      'An earlier portfolio website showcasing skills and projects, built with vanilla technologies and focused on clean layout and dark-themed visual design.',
+    tech: ['HTML', 'CSS', 'JavaScript'],
+    image: '/images/project-portfolio.png',
+    github: 'https://github.com/mohamed1fares/portfolio-2',
+    demo: 'https://mohamed1fares.github.io/portfolio-2/',
+  },
+];
+
+function ProjectCard({ project, index }: { project: Project; index: number }) {
+  const { ref, isVisible } = useReveal(0.1);
+  const isEven = index % 2 === 0;
 
   return (
-    <section id="projects" className="py-20 bg-gradient-to-br from-slate-50 to-blue-50">
-      <div className="container mx-auto px-6">
-        <div className="max-w-7xl mx-auto">
-          {/* Section Header */}
-          <div className="text-center mb-16">
-            <div className="flex items-center justify-center gap-3 mb-4">
-              <FolderOpen className="w-8 h-8 text-blue-600" />
-              <h2 className="text-4xl md:text-5xl font-bold text-gray-900">Featured Projects</h2>
-            </div>
-            <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto rounded-full"></div>
-            <p className="text-gray-600 mt-4 max-w-2xl mx-auto">
-              A showcase of my recent work, demonstrating expertise in full-stack development, 
-              modern frameworks, and innovative problem-solving.
-            </p>
-          </div>
+    <div
+      ref={ref}
+      className={`grid lg:grid-cols-2 gap-0 lg:gap-0 transition-all duration-1000 ease-out-expo ${
+        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+      } ${project.featured ? '' : ''}`}
+      style={{ transitionDelay: `${index * 150}ms` }}
+    >
+      {/* Image */}
+      <div className={`relative overflow-hidden group ${isEven ? '' : 'lg:order-2'}`}>
+        <div className="aspect-[16/10] lg:aspect-auto lg:h-full">
+          <img
+            src={project.image}
+            alt={`${project.title} screenshot`}
+            className="w-full h-full object-cover transition-transform duration-700 ease-out-expo group-hover:scale-105"
+            loading="lazy"
+          />
+          <div className="absolute inset-0 bg-bg-primary/20 group-hover:bg-transparent transition-colors duration-500" />
+        </div>
+      </div>
 
-          {/* Projects Grid */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {projects.map((project, index) => (
-              <div key={index} className="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100 hover:border-blue-200">
-                {/* Project Image */}
-                <div className="relative overflow-hidden">
-                  <img 
-                    src={project.image} 
-                    alt={project.title}
-                    className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  
-                  {/* Status Badge */}
-                  <div className="absolute top-4 left-4">
-                    <span className={`px-3 py-1 rounded-full text-xs font-semibold ${
-                      project.status === 'Completed' 
-                        ? 'bg-green-100 text-green-700 border border-green-200' 
-                        : 'bg-orange-100 text-orange-700 border border-orange-200'
-                    }`}>
-                      {project.status}
-                    </span>
-                  </div>
+      {/* Content */}
+      <div className={`flex flex-col justify-center p-8 md:p-12 lg:p-16 bg-bg-tertiary ${isEven ? '' : 'lg:order-1'}`}>
+        <div className="flex items-center gap-3 mb-4">
+          <span className="block w-6 h-px bg-accent" />
+          <span className="text-accent text-[11px] font-mono font-medium tracking-widest uppercase">
+            {project.subtitle}
+          </span>
+        </div>
 
-                  {/* Project Links - Show on Hover */}
-                  <div className="absolute top-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <a href={project.github} className="w-8 h-8 bg-black/70 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-black/90 transition-colors duration-200">
-                      <Github className="w-4 h-4" />
-                    </a>
-                    <a href={project.demo} className="w-8 h-8 bg-blue-600/70 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-blue-600/90 transition-colors duration-200">
-                      <ExternalLink className="w-4 h-4" />
-                    </a>
-                  </div>
-                </div>
+        <h3 className="font-display text-2xl md:text-3xl mb-4">
+          {project.title}
+        </h3>
 
-                {/* Project Content */}
-                <div className="p-6">
-                  {/* Title */}
-                  <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors duration-300">
-                    {project.title}
-                  </h3>
+        <p className="text-text-secondary text-sm leading-relaxed mb-6">
+          {project.description}
+        </p>
 
-                  {/* Description */}
-                  <p className="text-gray-600 text-sm leading-relaxed mb-4">
-                    {project.description}
-                  </p>
-
-                  {/* Technologies */}
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {project.technologies.slice(0, 3).map((tech, techIndex) => (
-                      <span key={techIndex} className="px-2 py-1 bg-gray-100 text-gray-700 rounded text-xs font-medium">
-                        {tech}
-                      </span>
-                    ))}
-                    {project.technologies.length > 3 && (
-                      <span className="px-2 py-1 bg-blue-100 text-blue-700 rounded text-xs font-medium">
-                        +{project.technologies.length - 3} more
-                      </span>
-                    )}
-                  </div>
-
-                  {/* Stats */}
-                  <div className="flex items-center justify-between text-sm text-gray-500 mb-4">
-                    <div className="flex items-center gap-4">
-                      <div className="flex items-center gap-1">
-                        <Star className="w-4 h-4 text-yellow-500" />
-                        <span>{project.stats.stars}</span>
-                      </div>
-                      <div className="flex items-center gap-1">
-                        <GitBranch className="w-4 h-4 text-green-500" />
-                        <span>{project.stats.forks}</span>
-                      </div>
-                      <div className="flex items-center gap-1">
-                        <Eye className="w-4 h-4 text-blue-500" />
-                        <span>{project.stats.views}</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Action Buttons */}
-                  <div className="flex gap-3">
-                    <a 
-                      href={project.demo}
-                      className="flex-1 bg-gradient-to-r from-blue-500 to-purple-600 text-white text-center py-2 px-4 rounded-lg font-medium hover:shadow-lg transition-all duration-300 hover:scale-105"
-                    >
-                      Live Demo
-                    </a>
-                    <a 
-                      href={project.github}
-                      className="px-4 py-2 border-2 border-gray-300 text-gray-700 rounded-lg font-medium hover:border-gray-400 hover:bg-gray-50 transition-all duration-300"
-                    >
-                      <Github className="w-4 h-4" />
-                    </a>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* View More Projects */}
-          <div className="text-center mt-12">
-            <a 
-              href="https://github.com/mohamedfares" 
-              className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-gray-900 to-gray-700 text-white rounded-full font-semibold hover:shadow-xl transition-all duration-300 hover:scale-105"
+        {/* Tech Stack */}
+        <div className="flex flex-wrap gap-2 mb-8">
+          {project.tech.map(t => (
+            <span
+              key={t}
+              className="px-3 py-1 text-[11px] font-mono font-medium tracking-wide text-text-secondary border border-border"
             >
-              <Github className="w-5 h-5" />
-              View All Projects on GitHub
-              <ExternalLink className="w-4 h-4" />
-            </a>
+              {t}
+            </span>
+          ))}
+        </div>
+
+        {/* Links */}
+        <div className="flex items-center gap-4">
+          <a
+            href={project.demo}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group/link inline-flex items-center gap-2 text-sm font-medium text-accent hover:text-accent-light transition-colors duration-300"
+          >
+            Live Demo
+            <svg className="w-4 h-4 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M7 17L17 7M17 7H7M17 7v10" />
+            </svg>
+          </a>
+          <a
+            href={project.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 text-sm text-text-tertiary hover:text-text-primary transition-colors duration-300"
+          >
+            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+            Source
+          </a>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default function Projects() {
+  const { ref: headerRef, isVisible: headerVisible } = useReveal();
+
+  return (
+    <section id="projects" className="py-24 md:py-32 bg-bg-primary">
+      <div className="container-portfolio">
+        {/* Section Header */}
+        <div
+          ref={headerRef}
+          className={`mb-16 md:mb-20 transition-all duration-1000 ease-out-expo ${
+            headerVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}
+        >
+          <div className="flex items-center gap-3 mb-6">
+            <span className="block w-8 h-px bg-accent" />
+            <span className="text-accent text-[13px] font-mono font-medium tracking-widest uppercase">
+              Selected Work
+            </span>
           </div>
+          <h2 className="font-display text-3xl md:text-4xl lg:text-5xl">
+            Projects I've <span className="italic text-text-secondary">built</span>
+          </h2>
+        </div>
+
+        {/* Project List */}
+        <div className="space-y-2">
+          {PROJECTS.map((project, i) => (
+            <ProjectCard key={project.title} project={project} index={i} />
+          ))}
+        </div>
+
+        {/* GitHub CTA */}
+        <div className="mt-16 text-center">
+          <a
+            href="https://github.com/mohamed1fares?tab=repositories"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-3 px-8 py-4 border border-border text-text-secondary text-sm font-medium tracking-wide uppercase hover:border-accent hover:text-accent transition-all duration-300"
+          >
+            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+            View All on GitHub
+          </a>
         </div>
       </div>
     </section>

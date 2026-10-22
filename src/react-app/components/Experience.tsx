@@ -1,183 +1,183 @@
-import { Briefcase, MapPin, Calendar, ExternalLink, TrendingUp } from 'lucide-react';
+import { useReveal } from '../hooks/useReveal';
 
-export default function Experience() {
-  const experiences = [
-    {
-      title: 'Senior Full Stack Developer',
-      company: 'TechFlow Solutions',
-      location: 'Cairo, Egypt',
-      period: '2023 - Present',
-      type: 'Full-time',
-      description: 'Leading a team of 5 developers in building scalable web applications using React, Node.js, and AWS. Implemented microservices architecture that improved system performance by 40%.',
-      achievements: [
-        'Led the migration of monolithic application to microservices architecture',
-        'Reduced application load time by 60% through performance optimization',
-        'Mentored 3 junior developers and established code review processes',
-        'Implemented automated testing pipeline resulting in 95% test coverage'
-      ],
-      technologies: ['React', 'Node.js', 'AWS', 'Docker', 'PostgreSQL', 'TypeScript'],
-      color: 'from-blue-500 to-purple-600'
-    },
-    {
-      title: 'Full Stack Developer',
-      company: 'Digital Innovations Ltd',
-      location: 'Cairo, Egypt',
-      period: '2022 - 2023',
-      type: 'Full-time',
-      description: 'Developed and maintained multiple client projects including e-commerce platforms and SaaS applications. Collaborated closely with UI/UX designers to create responsive and user-friendly interfaces.',
-      achievements: [
-        'Built 8+ production-ready web applications from scratch',
-        'Integrated payment systems (Stripe, PayPal) for e-commerce platforms',
-        'Optimized database queries resulting in 35% faster response times',
-        'Implemented real-time chat functionality using WebSocket'
-      ],
-      technologies: ['React', 'Express.js', 'MongoDB', 'Redis', 'Socket.io', 'Stripe API'],
-      color: 'from-green-500 to-teal-600'
-    },
-    {
-      title: 'Frontend Developer',
-      company: 'StartupHub',
-      location: 'Cairo, Egypt',
-      period: '2021 - 2022',
-      type: 'Full-time',
-      description: 'Focused on creating beautiful and intuitive user interfaces for startup clients. Worked in an agile environment with rapid prototyping and iterative development cycles.',
-      achievements: [
-        'Converted 15+ Figma designs to pixel-perfect React components',
-        'Implemented responsive design principles across all projects',
-        'Reduced bundle size by 45% through code splitting and optimization',
-        'Collaborated with backend team to integrate RESTful APIs'
-      ],
-      technologies: ['React', 'JavaScript', 'Tailwind CSS', 'Figma', 'Git', 'Webpack'],
-      color: 'from-purple-500 to-pink-600'
-    },
-    {
-      title: 'Web Development Intern',
-      company: 'CodeCraft Agency',
-      location: 'Cairo, Egypt',
-      period: '2020 - 2021',
-      type: 'Internship',
-      description: 'Learned fundamental web development concepts and contributed to client projects. Gained hands-on experience with modern development tools and frameworks.',
-      achievements: [
-        'Completed 6-month intensive web development program',
-        'Contributed to 5+ client websites and web applications',
-        'Learned version control and collaborative development practices',
-        'Received recognition for exceptional learning progress'
-      ],
-      technologies: ['HTML5', 'CSS3', 'JavaScript', 'Bootstrap', 'PHP', 'MySQL'],
-      color: 'from-orange-500 to-red-600'
-    }
-  ];
+interface ExperienceItem {
+  period: string;
+  type: string;
+  title: string;
+  company: string;
+  location: string;
+  description: string;
+  achievements: string[];
+  tech: string[];
+}
+
+const EXPERIENCES: ExperienceItem[] = [
+  {
+    period: '2025 — Present',
+    type: 'Freelance',
+    title: 'Full-Stack Developer',
+    company: 'Freelance',
+    location: 'Cairo, Egypt',
+    description:
+      'Building scalable web applications for clients using Angular, Node.js, and Express. Architecting both frontend and backend systems from scratch.',
+    achievements: [
+      'Designed and implemented microservices architecture for client projects',
+      'Built production-ready applications with comprehensive testing',
+      'Established code review processes and development best practices',
+    ],
+    tech: ['Angular', 'Node.js', 'Express', 'MongoDB', 'TypeScript'],
+  },
+  {
+    period: '2024 — 2025',
+    type: 'Part-Time',
+    title: 'Full-Stack Developer',
+    company: 'Digital Innovations Ltd',
+    location: 'Cairo, Egypt',
+    description:
+      'Developed and maintained client projects including e-commerce platforms and web applications. Collaborated with UI/UX designers to create responsive interfaces.',
+    achievements: [
+      'Built 8+ production-ready web applications from scratch',
+      'Integrated payment systems for e-commerce platforms',
+      'Optimized database queries resulting in faster response times',
+      'Implemented real-time features using WebSocket',
+    ],
+    tech: ['Angular', 'Express.js', 'MongoDB', 'Socket.io'],
+  },
+  {
+    period: '2024',
+    type: 'Internship',
+    title: 'Web Development Intern',
+    company: 'CodeCraft Agency',
+    location: 'Cairo, Egypt',
+    description:
+      'Learned modern web development practices and contributed to client projects. Gained hands-on experience with development tools and collaborative workflows.',
+    achievements: [
+      'Contributed to 5+ client websites and web applications',
+      'Learned version control and collaborative development practices',
+      'Completed intensive web development training program',
+    ],
+    tech: ['HTML5', 'CSS3', 'JavaScript', 'Bootstrap', 'MySQL'],
+  },
+];
+
+function ExperienceCard({ item, index }: { item: ExperienceItem; index: number }) {
+  const { ref, isVisible } = useReveal(0.1);
 
   return (
-    <section id="experience" className="py-20 bg-white">
-      <div className="container mx-auto px-6">
-        <div className="max-w-6xl mx-auto">
-          {/* Section Header */}
-          <div className="text-center mb-16">
-            <div className="flex items-center justify-center gap-3 mb-4">
-              <Briefcase className="w-8 h-8 text-blue-600" />
-              <h2 className="text-4xl md:text-5xl font-bold text-gray-900">Work Experience</h2>
-            </div>
-            <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto rounded-full"></div>
-            <p className="text-gray-600 mt-4 max-w-2xl mx-auto">
-              A journey of continuous growth, learning, and contributing to innovative projects across different industries.
-            </p>
+    <div
+      ref={ref}
+      className={`relative pl-8 md:pl-12 pb-16 last:pb-0 transition-all duration-1000 ease-out-expo ${
+        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+      }`}
+      style={{ transitionDelay: `${index * 100}ms` }}
+    >
+      {/* Timeline line */}
+      <div className="absolute left-0 top-2 bottom-0 w-px bg-border" />
+      {/* Timeline dot */}
+      <div className="absolute left-0 top-2 w-px flex justify-center -translate-x-[3px]">
+        <div className="w-[7px] h-[7px] rounded-full bg-accent" />
+      </div>
+
+      {/* Header */}
+      <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1 mb-3">
+        <span className="text-xs font-mono text-accent tracking-wide">{item.period}</span>
+        <span className="text-xs font-mono text-text-tertiary tracking-wide">· {item.type}</span>
+      </div>
+
+      <h3 className="font-display text-xl md:text-2xl mb-1">{item.title}</h3>
+      <p className="text-text-secondary text-sm mb-1">{item.company}</p>
+      <p className="text-text-tertiary text-xs font-mono mb-5">{item.location}</p>
+
+      <p className="text-text-secondary text-sm leading-relaxed mb-5">{item.description}</p>
+
+      {/* Achievements */}
+      <ul className="space-y-2 mb-6">
+        {item.achievements.map((a, i) => (
+          <li key={i} className="flex items-start gap-3 text-sm text-text-secondary">
+            <span className="block w-1 h-1 rounded-full bg-accent mt-2 flex-shrink-0" />
+            {a}
+          </li>
+        ))}
+      </ul>
+
+      {/* Tech */}
+      <div className="flex flex-wrap gap-2">
+        {item.tech.map(t => (
+          <span key={t} className="px-3 py-1 text-[11px] font-mono text-text-tertiary border border-border">
+            {t}
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export default function Experience() {
+  const { ref: headerRef, isVisible: headerVisible } = useReveal();
+
+  return (
+    <section id="experience" className="py-24 md:py-32 bg-bg-primary">
+      <div className="container-portfolio">
+        {/* Section Header */}
+        <div
+          ref={headerRef}
+          className={`mb-16 md:mb-20 transition-all duration-1000 ease-out-expo ${
+            headerVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}
+        >
+          <div className="flex items-center gap-3 mb-6">
+            <span className="block w-8 h-px bg-accent" />
+            <span className="text-accent text-[13px] font-mono font-medium tracking-widest uppercase">
+              Experience
+            </span>
           </div>
+          <h2 className="font-display text-3xl md:text-4xl lg:text-5xl">
+            Where I've <span className="italic text-text-secondary">worked</span>
+          </h2>
+        </div>
 
-          {/* Timeline */}
-          <div className="relative">
-            {/* Timeline line */}
-            <div className="absolute left-8 md:left-1/2 transform md:-translate-x-1/2 w-1 h-full bg-gradient-to-b from-blue-500 to-purple-600 rounded-full"></div>
+        {/* Education Highlight */}
+        <EducationBanner />
 
-            {/* Experience Items */}
-            <div className="space-y-12">
-              {experiences.map((exp, index) => (
-                <div key={index} className={`relative flex items-center ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
-                  {/* Timeline dot */}
-                  <div className="absolute left-8 md:left-1/2 transform -translate-x-1/2 w-4 h-4 bg-white border-4 border-blue-500 rounded-full z-10 shadow-lg"></div>
-
-                  {/* Content */}
-                  <div className={`w-full md:w-1/2 ${index % 2 === 0 ? 'md:pr-12' : 'md:pl-12'} ml-16 md:ml-0`}>
-                    <div className="group bg-gradient-to-br from-gray-50 to-white border border-gray-200 rounded-xl p-6 hover:shadow-2xl transition-all duration-300 hover:border-blue-300">
-                      {/* Company and Period */}
-                      <div className="flex flex-wrap items-center justify-between mb-4">
-                        <div className="flex items-center gap-2 text-sm text-gray-600">
-                          <Calendar className="w-4 h-4" />
-                          <span className="font-medium">{exp.period}</span>
-                          <span className="px-2 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-medium">
-                            {exp.type}
-                          </span>
-                        </div>
-                        <div className="flex items-center gap-1 text-sm text-gray-500">
-                          <MapPin className="w-4 h-4" />
-                          {exp.location}
-                        </div>
-                      </div>
-
-                      {/* Title and Company */}
-                      <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors duration-300">
-                        {exp.title}
-                      </h3>
-                      <div className="flex items-center gap-2 mb-4">
-                        <div className={`w-3 h-3 bg-gradient-to-r ${exp.color} rounded-full`}></div>
-                        <p className="text-lg font-semibold text-gray-700">{exp.company}</p>
-                      </div>
-
-                      {/* Description */}
-                      <p className="text-gray-600 mb-4 leading-relaxed">{exp.description}</p>
-
-                      {/* Key Achievements */}
-                      <div className="mb-4">
-                        <h4 className="font-semibold text-gray-900 mb-3 flex items-center gap-2">
-                          <TrendingUp className="w-4 h-4 text-green-600" />
-                          Key Achievements
-                        </h4>
-                        <ul className="space-y-2">
-                          {exp.achievements.map((achievement, achIndex) => (
-                            <li key={achIndex} className="flex items-start gap-2 text-sm text-gray-600">
-                              <div className="w-1.5 h-1.5 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                              <span>{achievement}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-
-                      {/* Technologies */}
-                      <div>
-                        <h4 className="font-semibold text-gray-900 mb-3">Technologies Used</h4>
-                        <div className="flex flex-wrap gap-2">
-                          {exp.technologies.map((tech, techIndex) => (
-                            <span key={techIndex} className="px-3 py-1 bg-gradient-to-r from-gray-100 to-gray-200 text-gray-700 rounded-full text-sm font-medium hover:from-blue-100 hover:to-purple-100 hover:text-blue-700 transition-all duration-200">
-                              {tech}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Call to Action */}
-          <div className="mt-16 text-center">
-            <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl p-8 text-white">
-              <h3 className="text-2xl font-bold mb-4">Ready for New Challenges</h3>
-              <p className="text-blue-100 mb-6 max-w-2xl mx-auto">
-                I'm always excited to take on new projects and collaborate with amazing teams. 
-                Let's build something incredible together!
-              </p>
-              <button className="group relative px-6 py-3 bg-white text-blue-600 rounded-full font-semibold overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-xl">
-                <span className="relative z-10 flex items-center gap-2">
-                  Get In Touch
-                  <ExternalLink className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
-                </span>
-              </button>
-            </div>
-          </div>
+        {/* Timeline */}
+        <div className="mt-16">
+          {EXPERIENCES.map((item, i) => (
+            <ExperienceCard key={item.period} item={item} index={i} />
+          ))}
         </div>
       </div>
     </section>
+  );
+}
+
+function EducationBanner() {
+  const { ref, isVisible } = useReveal(0.1);
+
+  return (
+    <div
+      ref={ref}
+      className={`grid md:grid-cols-3 gap-6 p-8 md:p-10 bg-bg-secondary border border-border transition-all duration-1000 ease-out-expo ${
+        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+      }`}
+    >
+      <div>
+        <p className="text-xs font-mono text-accent tracking-wide uppercase mb-2">Education</p>
+        <p className="font-display text-lg">BSc Computer Science</p>
+        <p className="text-text-secondary text-sm mt-1">6 October University · GPA 3.5/4.0</p>
+        <p className="text-text-tertiary text-xs font-mono mt-1">2022 — 2026</p>
+      </div>
+      <div>
+        <p className="text-xs font-mono text-accent tracking-wide uppercase mb-2">Certification</p>
+        <p className="font-display text-lg">MEAN Stack</p>
+        <p className="text-text-secondary text-sm mt-1">National Telecommunication Institute (NTI)</p>
+        <p className="text-text-tertiary text-xs font-mono mt-1">2025</p>
+      </div>
+      <div>
+        <p className="text-xs font-mono text-accent tracking-wide uppercase mb-2">Training</p>
+        <p className="font-display text-lg">UI/UX Design</p>
+        <p className="text-text-secondary text-sm mt-1">ROUTE</p>
+        <p className="text-text-tertiary text-xs font-mono mt-1">2024</p>
+      </div>
+    </div>
   );
 }

@@ -1,15 +1,14 @@
 import z from "zod";
 
 /**
- * Types shared between the client and server go here.
- *
- * For example, we can add zod schemas for API input validation, and derive types from them:
- *
- * export const TodoSchema = z.object({
- *   id: z.number(),
- *   name: z.string(),
- *   completed: z.number().int(), // 0 or 1
- * })
- *
- * export type TodoType = z.infer<typeof TodoSchema>;
+ * Contact form validation schema
  */
+export const ContactFormSchema = z.object({
+  name: z.string().trim().min(1, "Please enter your name").max(100, "Name is too long"),
+  email: z.string().trim().email("Please enter a valid email address"),
+  subject: z.string().trim().min(1, "Please enter a subject").max(200, "Subject is too long"),
+  message: z.string().trim().min(1, "Please enter a message").max(5000, "Message is too long"),
+});
+
+export type ContactFormData = z.infer<typeof ContactFormSchema>;
+
