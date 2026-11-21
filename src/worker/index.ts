@@ -5,7 +5,7 @@ const app = new Hono<{ Bindings: Env }>();
 
 /**
  * Contact form endpoint
- * Validates input and stores in D1, then sends email notification via EmailJS
+ * Validates input, stores in D1 if available, and sends email notification via FormSubmit
  */
 app.post("/api/contact", async (c) => {
   try {
@@ -50,15 +50,13 @@ app.post("/api/contact", async (c) => {
       }
     }
 
-    // Send email notification to mf7059708@gmail.com via FormSubmit
+    // Send email notification to mohamed.fares.developer@gmail.com via FormSubmit
     try {
-      await fetch("https://formsubmit.co/ajax/mf7059708@gmail.com", {
+      const emailRes = await fetch("https://formsubmit.co/ajax/mohamed.fares.developer@gmail.com", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           "Accept": "application/json",
-          "Origin": "https://mohamedfares.dev",
-          "Referer": "https://mohamedfares.dev/",
         },
         body: JSON.stringify({
           name,
@@ -69,11 +67,16 @@ app.post("/api/contact", async (c) => {
           _template: "table",
         }),
       });
+
+      if (!emailRes.ok) {
+        const errorText = await emailRes.text();
+        console.warn("FormSubmit response not ok:", emailRes.status, errorText);
+      }
     } catch (mailErr) {
-      console.warn("Email dispatch error (best-effort):", mailErr);
+      console.warn("Email dispatch error:", mailErr);
     }
 
-    return c.json({ success: true, message: "Message received successfully" });
+    return c.json({ success: true, message: "Message sent and received successfully" });
   } catch (err) {
     console.error("Contact handler error:", err);
     return c.json({ error: "Internal server error" }, 500);

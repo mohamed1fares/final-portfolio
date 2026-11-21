@@ -4,30 +4,31 @@ export default function Footer() {
   };
 
   return (
-    <footer className="py-12 bg-bg-primary border-t border-border">
+    <footer className="py-10 border-t border-border" style={{ background: '#FFFFFF' }}>
       <div className="container-portfolio">
-        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-5">
           {/* Left */}
-          <div className="flex items-center gap-6">
-            <span className="w-9 h-9 flex items-center justify-center border border-border text-text-tertiary font-mono text-sm">
-              MF
-            </span>
+          <div className="flex items-center gap-3">
+            <img
+              src="/images/avatar.jpg"
+              alt="Mohamed Fares"
+              className="w-8 h-8 rounded-lg object-cover ring-2 ring-accent/20"
+            />
             <div>
-              <p className="text-sm text-text-secondary">
-                © {new Date().getFullYear()} Mohamed Fares
-              </p>
-              <p className="text-xs text-text-tertiary mt-0.5">
+              <p className="text-sm font-semibold text-text-primary">Mohamed Fares</p>
+              <p className="text-xs text-text-tertiary">
+                © {new Date().getFullYear()} ·{' '}
                 <a
-                  href="mailto:mohamed.fares.engineer@gmail.com"
+                  href="mailto:mohamed.fares.developer@gmail.com"
                   className="hover:text-accent transition-colors duration-300"
                 >
-                  mohamed.fares.engineer@gmail.com
+                  mohamed.fares.developer@gmail.com
                 </a>
               </p>
             </div>
           </div>
 
-          {/* Center / Right */}
+          {/* Right */}
           <div className="flex items-center gap-6">
             <div className="flex items-center gap-4 text-xs font-mono">
               <a
@@ -38,7 +39,7 @@ export default function Footer() {
               >
                 GitHub
               </a>
-              <span className="text-border">/</span>
+              <span className="text-border-strong">/</span>
               <a
                 href="https://www.linkedin.com/in/mohamed-fares-ismail"
                 target="_blank"
@@ -47,19 +48,31 @@ export default function Footer() {
               >
                 LinkedIn
               </a>
+              <span className="text-border-strong">/</span>
+              <a
+                href="/Mohamed_Fares_CV.pdf"
+                download
+                className="text-text-tertiary hover:text-accent transition-colors duration-300"
+              >
+                CV
+              </a>
             </div>
 
             <button
               onClick={scrollToTop}
-              className="group inline-flex items-center gap-2 text-xs font-mono text-text-tertiary hover:text-accent tracking-wide uppercase transition-colors duration-300"
+              className="group inline-flex items-center gap-1.5 text-xs font-mono text-text-tertiary hover:text-accent tracking-wide uppercase transition-colors duration-300"
             >
-              Back to top
+              Top
               <svg className="w-3.5 h-3.5 group-hover:-translate-y-0.5 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M5 10l7-7m0 0l7 7m-7-7v18" />
               </svg>
             </button>
           </div>
         </div>
+
+        <p className="text-xs text-text-tertiary mt-6 font-mono">
+          Full Stack Developer · Angular · TypeScript · Node.js · Express.js · Giza, Egypt
+        </p>
       </div>
     </footer>
   );

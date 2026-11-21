@@ -3,7 +3,9 @@ import { useState, useEffect, useCallback } from 'react';
 const NAV_ITEMS = [
   { id: 'home', label: 'Home' },
   { id: 'about', label: 'About' },
-  { id: 'projects', label: 'Work' },
+  { id: 'testimonial', label: 'Testimonial' },
+  { id: 'clinic-hub', label: 'Clinic Hub' },
+  { id: 'projects', label: 'Projects' },
   { id: 'skills', label: 'Skills' },
   { id: 'experience', label: 'Experience' },
   { id: 'contact', label: 'Contact' },
@@ -16,12 +18,10 @@ export default function Navigation() {
 
   const handleScroll = useCallback(() => {
     setScrolled(window.scrollY > 60);
-
     const sections = NAV_ITEMS.map(item => ({
       id: item.id,
       el: document.getElementById(item.id),
     }));
-
     const scrollPos = window.scrollY + window.innerHeight / 3;
     for (let i = sections.length - 1; i >= 0; i--) {
       const section = sections[i];
@@ -37,7 +37,6 @@ export default function Navigation() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [handleScroll]);
 
-  // Lock body scroll when mobile menu is open
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? 'hidden' : '';
     return () => { document.body.style.overflow = ''; };
@@ -55,101 +54,108 @@ export default function Navigation() {
     <>
       <nav
         id="main-nav"
+        role="navigation"
+        aria-label="Main navigation"
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-out-expo ${
           scrolled
-            ? 'bg-bg-primary/90 backdrop-blur-md border-b border-border'
+            ? 'bg-white/95 backdrop-blur-md border-b border-border shadow-sm'
             : 'bg-transparent'
         }`}
       >
-        <div className="container-portfolio flex items-center justify-between h-16 md:h-20">
+        <div className="container-portfolio flex items-center justify-between h-16 md:h-18" style={{ height: scrolled ? '64px' : '72px', transition: 'height 0.4s var(--ease-out)' }}>
           {/* Logo */}
           <button
             onClick={() => scrollTo('home')}
-            className="flex items-center gap-3 group"
+            className="flex items-center gap-2.5 group"
             aria-label="Go to top"
           >
-            <span className="w-9 h-9 flex items-center justify-center border border-accent text-accent font-mono text-sm font-medium tracking-wider group-hover:bg-accent group-hover:text-white transition-all duration-300">
-              MF
-            </span>
-            <span className="hidden sm:block text-sm font-medium tracking-wide text-text-secondary group-hover:text-text-primary transition-colors duration-300">
+            <img
+              src="/images/avatar.jpg"
+              alt="Mohamed Fares"
+              className="w-8 h-8 rounded-lg object-cover ring-2 ring-accent/20 group-hover:ring-accent transition-all duration-300"
+            />
+            <span className="hidden sm:block text-sm font-semibold text-text-primary group-hover:text-accent transition-colors duration-300">
               Mohamed Fares
             </span>
           </button>
 
           {/* Desktop Nav */}
-          <div className="hidden md:flex items-center gap-1">
+          <div className="hidden lg:flex items-center gap-1">
             {NAV_ITEMS.map(item => (
               <button
                 key={item.id}
                 onClick={() => scrollTo(item.id)}
-                className={`relative px-4 py-2 text-[13px] font-medium tracking-wide uppercase transition-colors duration-300 ${
+                className={`relative px-3 py-2 text-[13px] font-medium tracking-wide rounded-md transition-all duration-300 ${
                   activeSection === item.id
-                    ? 'text-accent'
-                    : 'text-text-tertiary hover:text-text-primary'
+                    ? 'text-accent bg-accent-subtle'
+                    : 'text-text-secondary hover:text-text-primary hover:bg-bg-primary'
                 }`}
               >
                 {item.label}
-                {activeSection === item.id && (
-                  <span className="absolute bottom-0 left-4 right-4 h-px bg-accent" />
-                )}
               </button>
             ))}
           </div>
 
-          {/* Resume CTA (desktop) */}
-          <a
-            href="/Mohamed-Fares-Resume.pdf"
-            download
-            className="hidden md:inline-flex items-center gap-2 px-5 py-2 text-[13px] font-medium tracking-wide uppercase border border-accent text-accent hover:bg-accent hover:text-white transition-all duration-300"
-          >
-            Résumé
-            <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-            </svg>
-          </a>
+          {/* Right side */}
+          <div className="flex items-center gap-3">
+            <a
+              href="/Mohamed_Fares_CV.pdf"
+              download
+              className="hidden md:inline-flex btn-primary text-xs px-4 py-2"
+              aria-label="Download CV"
+            >
+              <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+              </svg>
+              Download CV
+            </a>
 
-          {/* Mobile Hamburger */}
-          <button
-            onClick={() => setMobileOpen(prev => !prev)}
-            className="md:hidden flex flex-col justify-center items-center w-10 h-10 gap-1.5 group"
-            aria-label="Toggle menu"
-            aria-expanded={mobileOpen}
-          >
-            <span className={`block w-6 h-px bg-text-primary transition-all duration-300 origin-center ${mobileOpen ? 'rotate-45 translate-y-[3.5px]' : ''}`} />
-            <span className={`block w-6 h-px bg-text-primary transition-all duration-300 ${mobileOpen ? 'opacity-0' : ''}`} />
-            <span className={`block w-6 h-px bg-text-primary transition-all duration-300 origin-center ${mobileOpen ? '-rotate-45 -translate-y-[3.5px]' : ''}`} />
-          </button>
+            {/* Mobile Hamburger */}
+            <button
+              onClick={() => setMobileOpen(prev => !prev)}
+              className="lg:hidden flex flex-col justify-center items-center w-9 h-9 gap-1.5 rounded-md hover:bg-bg-primary transition-colors"
+              aria-label="Toggle menu"
+              aria-expanded={mobileOpen}
+            >
+              <span className={`block w-5 h-0.5 bg-text-primary transition-all duration-300 origin-center ${mobileOpen ? 'rotate-45 translate-y-[6px]' : ''}`} />
+              <span className={`block w-5 h-0.5 bg-text-primary transition-all duration-300 ${mobileOpen ? 'opacity-0' : ''}`} />
+              <span className={`block w-5 h-0.5 bg-text-primary transition-all duration-300 origin-center ${mobileOpen ? '-rotate-45 -translate-y-[6px]' : ''}`} />
+            </button>
+          </div>
         </div>
       </nav>
 
-      {/* Mobile Overlay */}
+      {/* Mobile Menu */}
       <div
-        className={`fixed inset-0 z-40 bg-bg-primary transition-opacity duration-500 md:hidden ${
+        className={`fixed inset-0 z-40 bg-white transition-all duration-400 lg:hidden ${
           mobileOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
         }`}
       >
-        <div className="flex flex-col items-start justify-center h-full container-portfolio">
+        <div className="flex flex-col items-start justify-center h-full container-portfolio gap-2 pt-16">
           {NAV_ITEMS.map((item, i) => (
             <button
               key={item.id}
               onClick={() => scrollTo(item.id)}
-              className={`text-3xl font-display py-3 transition-all duration-500 ${
+              className={`text-2xl font-semibold py-2 w-full text-left transition-all duration-400 ${
                 mobileOpen ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'
               } ${activeSection === item.id ? 'text-accent' : 'text-text-secondary hover:text-text-primary'}`}
-              style={{ transitionDelay: mobileOpen ? `${i * 80 + 200}ms` : '0ms' }}
+              style={{ transitionDelay: mobileOpen ? `${i * 60 + 100}ms` : '0ms' }}
             >
               {item.label}
             </button>
           ))}
           <a
-            href="/Mohamed-Fares-Resume.pdf"
+            href="/Mohamed_Fares_CV.pdf"
             download
-            className={`mt-8 inline-flex items-center gap-2 px-6 py-3 text-sm font-medium tracking-wide uppercase border border-accent text-accent hover:bg-accent hover:text-white transition-all duration-500 ${
+            className={`mt-6 btn-primary transition-all duration-400 ${
               mobileOpen ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'
             }`}
-            style={{ transitionDelay: mobileOpen ? `${NAV_ITEMS.length * 80 + 200}ms` : '0ms' }}
+            style={{ transitionDelay: mobileOpen ? `${NAV_ITEMS.length * 60 + 100}ms` : '0ms' }}
           >
-            Download Résumé
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+            </svg>
+            Download CV
           </a>
         </div>
       </div>
