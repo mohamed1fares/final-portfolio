@@ -312,9 +312,9 @@ export default function Contact() {
                     >
                       {link.icon}
                     </span>
-                    <div className="min-w-0">
+                    <div className="min-w-0 flex-1">
                       <p className="text-[11px] font-mono text-text-tertiary uppercase tracking-wider mb-0.5">{link.label}</p>
-                      <p className="text-sm font-semibold text-text-primary group-hover:text-accent transition-colors duration-300 truncate">{link.value}</p>
+                      <p className="text-sm font-semibold text-text-primary group-hover:text-accent transition-colors duration-300 break-all">{link.value}</p>
                     </div>
                   </a>
                 ) : (
@@ -329,9 +329,9 @@ export default function Contact() {
                     >
                       {link.icon}
                     </span>
-                    <div className="min-w-0">
+                    <div className="min-w-0 flex-1">
                       <p className="text-[11px] font-mono text-text-tertiary uppercase tracking-wider mb-0.5">{link.label}</p>
-                      <p className="text-sm font-semibold text-text-primary truncate">{link.value}</p>
+                      <p className="text-sm font-semibold text-text-primary break-all">{link.value}</p>
                     </div>
                   </div>
                 )

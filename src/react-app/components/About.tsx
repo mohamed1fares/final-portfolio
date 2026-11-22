@@ -38,18 +38,18 @@ export default function About() {
             </div>
 
             {/* Key attributes */}
-            <div className="grid grid-cols-2 gap-4 mt-10">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mt-8 sm:mt-10">
               {[
                 { icon: '🧩', label: 'Full Stack', desc: 'Frontend to backend' },
                 { icon: '🏗️', label: 'Architecture', desc: 'Scalable systems design' },
                 { icon: '🔗', label: 'Integrations', desc: 'APIs & webhooks' },
                 { icon: '🛡️', label: 'Auth & RBAC', desc: 'JWT, OAuth, roles' },
               ].map(item => (
-                <div key={item.label} className="flex items-start gap-3 p-4 rounded-xl" style={{ background: '#F8FAFC', border: '1px solid #E2E8F0' }}>
-                  <span className="text-xl">{item.icon}</span>
-                  <div>
+                <div key={item.label} className="flex items-start gap-3 p-3.5 sm:p-4 rounded-xl" style={{ background: '#F8FAFC', border: '1px solid #E2E8F0' }}>
+                  <span className="text-xl flex-shrink-0">{item.icon}</span>
+                  <div className="min-w-0 flex-1">
                     <p className="text-sm font-semibold text-text-primary">{item.label}</p>
-                    <p className="text-xs text-text-tertiary">{item.desc}</p>
+                    <p className="text-xs text-text-tertiary mt-0.5">{item.desc}</p>
                   </div>
                 </div>
               ))}
@@ -85,10 +85,10 @@ export default function About() {
                 { label: 'Training', value: 'MEAN Stack — National Telecommunication Institute', sub: '180 hrs · Score: 100%' },
                 { label: 'Location', value: 'Giza, Egypt', sub: 'Open to remote opportunities' },
               ].map(fact => (
-                <div key={fact.label} className="flex gap-4 p-4 rounded-xl" style={{ background: '#F8FAFC', border: '1px solid #E2E8F0' }}>
-                  <span className="text-xs font-mono font-semibold text-accent uppercase tracking-wide w-20 flex-shrink-0 pt-0.5">{fact.label}</span>
-                  <div>
-                    <p className="text-sm font-medium text-text-primary">{fact.value}</p>
+                <div key={fact.label} className="flex flex-col sm:flex-row sm:gap-4 p-3.5 sm:p-4 rounded-xl" style={{ background: '#F8FAFC', border: '1px solid #E2E8F0' }}>
+                  <span className="text-xs font-mono font-semibold text-accent uppercase tracking-wide sm:w-20 flex-shrink-0 mb-1 sm:mb-0 sm:pt-0.5">{fact.label}</span>
+                  <div className="min-w-0 flex-1">
+                    <p className="text-sm font-medium text-text-primary break-words">{fact.value}</p>
                     <p className="text-xs text-text-tertiary mt-0.5">{fact.sub}</p>
                   </div>
                 </div>

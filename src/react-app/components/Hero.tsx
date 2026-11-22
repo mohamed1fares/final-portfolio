@@ -192,7 +192,7 @@ export default function Hero() {
 
               {/* Floating accent card */}
               <div
-                className="absolute -bottom-5 -left-5 card p-4 flex items-center gap-3"
+                className="absolute -bottom-5 -left-5 card p-4 hidden sm:flex items-center gap-3"
                 style={{ borderRadius: '12px', minWidth: '180px' }}
               >
                 <span className="w-10 h-10 rounded-lg bg-accent-subtle flex items-center justify-center flex-shrink-0">
@@ -208,7 +208,7 @@ export default function Hero() {
 
               {/* NTI badge */}
               <div
-                className="absolute -top-4 -right-4 card p-3 text-center"
+                className="absolute -top-4 -right-4 card p-3 text-center hidden sm:block"
                 style={{ borderRadius: '12px', minWidth: '100px' }}
               >
                 <p className="text-[11px] font-mono font-semibold text-accent">NTI</p>

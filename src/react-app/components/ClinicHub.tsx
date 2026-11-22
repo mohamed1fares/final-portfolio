@@ -76,7 +76,7 @@ function ArchitectureDiagram() {
       {layers.map((layer, li) => (
         <div key={layer.title}>
           <p className="text-xs font-mono font-semibold uppercase tracking-wide mb-3" style={{ color: layer.color }}>{layer.title}</p>
-          <div className="grid grid-cols-3 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             {layer.nodes.map(node => (
               <div key={node.label} className="arch-node">
                 <div className="arch-icon">{node.icon}</div>
